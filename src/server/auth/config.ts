@@ -3,7 +3,7 @@ import { type DefaultSession, type NextAuthConfig } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 
 import { db } from "~/server/db";
-
+import { Resource } from "sst";
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
@@ -19,10 +19,11 @@ export const authConfig = {
   adapter: PrismaAdapter(db),
   providers: [
     DiscordProvider({
-      clientId: process.env.AUTH_DISCORD_ID!,
-      clientSecret: process.env.AUTH_DISCORD_SECRET!,
+      clientId: Resource.AUTH_DISCORD_ID.value,
+      clientSecret: Resource.AUTH_DISCORD_SECRET.value,
     }),
   ],
+  secret: '6uh9Z9gSwJpthE2C6M3NX8194AzP9dVNOGBDRt4Amis=',
   callbacks: {
     session: ({ session, user }) => {
       return {

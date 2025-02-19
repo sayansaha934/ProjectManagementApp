@@ -8,8 +8,9 @@ import superjson from "superjson";
 import { type AppRouter } from "~/server/api/root";
 
 const getBaseUrl = () => {
+  console.log('getBaseUrl', process.env.NEXT_PUBLIC_URL)
   if (typeof window !== "undefined") return ""; // Use relative URL in browser
-  if (process.env.NEXT_PUBLIC_VERCEL_URL) return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`; // Vercel Deployment
+  if (process.env.NEXT_PUBLIC_URL) return process.env.NEXT_PUBLIC_URL;
   return `http://localhost:${process.env.PORT ?? 3000}`; // Local Development
 };
 
